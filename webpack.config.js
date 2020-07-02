@@ -28,7 +28,7 @@ module.exports = {
     },
 
     resolve: {
-        extensions: ['*', '.js', '.jsx']
+        extensions: ['*', '.js', '.jsx', '.css']
     },
 
     output: {
@@ -39,7 +39,7 @@ module.exports = {
 
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'OlSSr'
+            title: 'ssr map'
         }),
         new webpack.HotModuleReplacementPlugin()
     ]
