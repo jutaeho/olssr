@@ -42,9 +42,5 @@ module.exports = {
             title: 'OlSSr'
         }),
         new webpack.HotModuleReplacementPlugin()
-    ],
-
-    devServer: {
-        contentBase: './dist'
-    }
+    ]
 }
