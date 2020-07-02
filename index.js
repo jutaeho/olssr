@@ -11,8 +11,7 @@ app.set('html', require('ejs').renderFile);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
-    res.end('hello server');
-    // res.render(path.join(__dirname, 'dist', 'index.html'))
+    res.render(path.join(__dirname, 'dist', 'index.html'))
 });
 
 app.listen(4000, () => console.log(`listening on port 4000`));
