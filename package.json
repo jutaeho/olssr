@@ -1,0 +1,24 @@
+{
+  "name": "olssr",
+  "version": "1.0.0",
+  "description": "React-based openlayers server side rendering",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jutaeho/olssr.git"
+  },
+  "keywords": [
+    "react",
+    "ol",
+    "ssr"
+  ],
+  "author": "taeho",
+  "license": "BSD2-Clause",
+  "bugs": {
+    "url": "https://github.com/jutaeho/olssr/issues"
+  },
+  "homepage": "https://github.com/jutaeho/olssr#readme"
+}
