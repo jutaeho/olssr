@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const NodeMonPluging = require('nodemon-webpack-plugin');
 
 module.exports = {
     entry: path.join(__dirname, 'src', 'App.js'),
@@ -40,7 +41,6 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'ssr map'
-        }),
-        new webpack.HotModuleReplacementPlugin()
+        })
     ]
 }

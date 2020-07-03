@@ -7,75 +7,51 @@ import View from 'ol/View';
 import Feature from 'ol/Feature';
 import {Point} from 'ol/geom';
 import * as Extent from 'ol/extent';
-import { defaults as defaultControls, ScaleLine } from 'ol/control';
+import { defaults as defaultControls, ScaleLine, ZoomToExtent, FullScreen } from 'ol/control';
 
-import {BaseLayerControl} from './Control';
+import {BaseLayerControl, RandomPointControl, MapExportControl} from './Control';
 
 
-/** 
+/**
  * @name MapContainer
  * @extends React.Component
  * @description OpenLayers Map Container
  */
 export default class MapContainer extends React.Component {
-    
+
     componentDidMount() {
 
-        let backmap = [];
-        backmap.push(new Tile({ id: "osm", visible: true, source: new OSM() })); 
-        backmap.push(new Tile({ id: "base", visible: false, source: new XYZ({ url: `http://api.vworld.kr/req/wmts/1.0.0/6976869A-906D-3AB8-ADD4-5DC3FAE38150/Base/{z}/{y}/{x}.png` }) })); 
-        backmap.push(new Tile({ id: "satellite", visible: false, source: new XYZ({ url: `http://api.vworld.kr/req/wmts/1.0.0/6976869A-906D-3AB8-ADD4-5DC3FAE38150/Satellite/{z}/{y}/{x}.jpeg` })}));
+        let basemaps = [];
+        basemaps.push(new Tile({ id: "osm", visible: true, source: new OSM() }));
+        basemaps.push(new Tile({ id: "base", visible: false, source: new XYZ({ url: `http://api.vworld.kr/req/wmts/1.0.0/6976869A-906D-3AB8-ADD4-5DC3FAE38150/Base/{z}/{y}/{x}.png` }) }));
+        basemaps.push(new Tile({ id: "satellite", visible: false, source: new XYZ({ url: `http://api.vworld.kr/req/wmts/1.0.0/6976869A-906D-3AB8-ADD4-5DC3FAE38150/Satellite/{z}/{y}/{x}.jpeg` })}));
 
+        let vectors = [];
+        vectors.push(new Vector({source: new VectorSource({wrapX: false})}));
 
         new Map({
             target: 'map',
             layers: [
-                ...backmap,
-                new Vector({
-                    source: new VectorSource({
-                        features: this.createRandPoint(1000)
-                    })
-                })
+                ...basemaps,
+                ...vectors
             ],
             view: new View({
                 center: Extent.getCenter([13281796.89493656, 3869917.0510634207, 15145521.220454054, 4779453.349506072]),
-                zoom: 7.3
+                zoom: 7.3,
+                extent: [13281796.89493656, 3869917.0510634207, 15145521.220454054, 4779453.349506072]
             }),
             controls: defaultControls().extend([
-                new ScaleLine({
-                    units: 'metric'
-                }),
-                new BaseLayerControl({
-                    source: backmap
-                })
+                new ScaleLine({ units: 'metric' }),
+                new ZoomToExtent({ extent: [13281796.89493656, 3869917.0510634207, 15145521.220454054, 4779453.349506072] }),
+                new FullScreen({ className: 'ol-fullscreen' }),
+                new BaseLayerControl({ source: basemaps }),
+                new RandomPointControl({ source: vectors}),
+                new MapExportControl()
             ])
         })
 
     }
 
-
-    /** 
-     * @name createRandPoint
-     * @param {Number} count
-     * @return {Array} features
-     * @description create random point
-     */
-    createRandPoint(count) {
-        let features = new Array(count);
-
-        var extent = [13281796.89493656, 3869917.0510634207, 15145521.220454054, 4779453.349506072];
-
-        for(var i=0; i <= count; i++) {
-            let coordinate = []
-          coordinate.push(( Math.random () * (extent[2] - extent[0]) ) + extent[0]);
-          coordinate.push(( Math.random () * (extent[3] - extent[1]) ) + extent[1]);
-
-          features[i] = new Feature(new Point(coordinate));
-        }
-    
-        return features;
-    }
-    
     render() {
         return (
             <div id="map"></div>

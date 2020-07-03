@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node index",
-    "build": "webpack"
+    "start": "babel-node index.js",
+    "build": "webpack --mode production",
+    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot --port 4000",
+    "server": "nodemon --exec babel-node index.js"
   },
   "repository": {
     "type": "git",
