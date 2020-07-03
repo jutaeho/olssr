@@ -5,7 +5,6 @@ import Feature from 'ol/Feature';
 import {Point} from 'ol/geom';
 
 import { Control } from 'ol/control';
-import { extend } from 'ol/extent';
 
 
 /**
@@ -133,9 +132,9 @@ class RandomPointControl extends Control {
 }
 
 /**
- * @name RandomPointControl
- * @extends ol.Control
- * @description Random Point Control
+ * @name MapExport
+ * @extends React.Component
+ * @description map export
  */
 class MapExport extends React.Component {
     constructor(props) {
@@ -154,6 +153,11 @@ class MapExport extends React.Component {
     }
 }
 
+/**
+ * @name MapExportControl
+ * @extends ol.Control
+ * @description map export control
+ */
 class MapExportControl extends Control {
     constructor(opt_options) {
         var options = opt_options || {};
@@ -171,9 +175,10 @@ class MapExportControl extends Control {
     }
 
     handleClick() {
-        this.getMap().once('rendercomplete', function () {
+        this.getMap().once('rendercomplete', () => {
+            'use strict';
             var mapCanvas = document.createElement('canvas');
-            var size = this.getSize();
+            var size = this.getMap().getSize();
             mapCanvas.width = size[0];
             mapCanvas.height = size[1];
             var mapContext = mapCanvas.getContext('2d');

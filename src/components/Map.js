@@ -4,8 +4,6 @@ import Map from 'ol/Map';
 import { Vector, Tile } from 'ol/layer';
 import { Vector as VectorSource, OSM, XYZ } from 'ol/source';
 import View from 'ol/View';
-import Feature from 'ol/Feature';
-import {Point} from 'ol/geom';
 import * as Extent from 'ol/extent';
 import { defaults as defaultControls, ScaleLine, ZoomToExtent, FullScreen } from 'ol/control';
 
