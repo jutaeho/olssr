@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Map from './Map';
+import InitMap from './Map';
 
 /**
  * @name MapContainer
@@ -10,7 +10,14 @@ import Map from './Map';
 export default class MapContainer extends React.Component {
 
     componentDidMount() {
-        new Map();
+        let map = new InitMap({
+            tile: ['osm', 'sat'],
+            vector: ['vector'],
+            control: ['scale', 'extent', 'fullscreen', 'baselayer', 'export'],
+            target: 'map'
+        });
+
+        map.init();
     }
 
     render() {

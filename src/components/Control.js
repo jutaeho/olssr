@@ -22,7 +22,7 @@ class BaseLayerSelector extends React.Component {
         return (
             <select className="form-control form-control-sm" onChange={this.props.onChange}>
                 {this.props.items.map((value, index) => {
-                    return <option value={value.id}>${value.id.toUpperCase()}</option>      
+                    return <option key={index} value={value.getProperties().id}>{value.getProperties().id.toUpperCase()}</option>      
                 })}
             </select>
         )
